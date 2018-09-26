@@ -49,8 +49,9 @@ Token fila_remover(Fila *f) {
         f->ultimo == NULL;
     }
 
+    Token tmpToken;
     tmpToken = tmp->token;
-    free(tmp)
+    free(tmp);
 
     return(tmpToken);
 }
