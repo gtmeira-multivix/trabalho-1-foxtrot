@@ -12,11 +12,17 @@ struct pilha {
 };
 
 Pilha* pilha_criar() {
-	//Implemente
+	Pilha *p = (Pilha *)malloc(sizeof(Pilha));
+    p->primeiro = NULL;
+    return p;
 }
 
 void pilha_push(Pilha *p, Token t) {
-	//Implemente
+	No *tmp = (No *)malloc(sizeof(No));
+    tmp->token = t;
+
+    tmp->prox = p->primeiro;
+    p->primeiro = tmp;
 }
 
 Token pilha_pop(Pilha *p) {
@@ -38,3 +44,4 @@ void pilha_destruir(Pilha *p) {
 void pilha_imprimir(Pilha *p) {
 	//Implemente
 }
+
