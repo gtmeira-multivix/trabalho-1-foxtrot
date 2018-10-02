@@ -5,15 +5,27 @@
 #include "tokenizacao.h"
 
 int main() {
-	//Substitua esta função pela implementação do seu trabalho.
-	printf("Digite uma expressão:\n");
+	//Substitua esta funï¿½ï¿½o pela implementaï¿½ï¿½o do seu trabalho.
+
+    Fila *filaTokens = fila_criar();
+    Fila *filaSaida = fila_criar();
+
+	printf("Digite uma expressï¿½o:\n");
 	Token t = token_proximo();
 	
-	while(t.tipo != FIM && t.tipo != ERRO) {
+	while(t.tipo != FIM && t.tipo != ERRO) { //O professor usou t.tipo, mas tipo nÃ£o possui os valores FIM e ERRO
 		printf("\nToken = ");
 		token_imprimir(t);
+        fila_adicionar(filaTokens, t);
 		t = token_proximo();
 	}
 	
+    while(fila_vazia(filaTokens) == 0){
+        Token tmpToken = fila_remover(filaTokens);
+        if (tmpToken.tipo == NUMERO){
+            fila_adicionar(filaSaida, tmpToken);
+        }
+    }
+
 	return 0;
 }

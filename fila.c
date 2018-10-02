@@ -8,9 +8,9 @@ typedef struct no {
   struct no *prox;
 } No;
 
-typedef struct fila {
+struct fila {
   No *primeiro, *ultimo;
-} Fila;
+};
 
 Fila* fila_criar() {
 	Fila *f = (Fila *) malloc(sizeof(Fila));
