@@ -94,7 +94,7 @@ int main() {
             pilha_push(pilhaCalculo, tmpToken);
         }
         else{
-            int res, num1, num2;
+            float res, num1, num2;
             num2 = pilha_pop(pilhaCalculo).valor;
             num1 = pilha_pop(pilhaCalculo).valor;
 
@@ -129,7 +129,7 @@ int main() {
             }
         }
     }
-    printf("\n\nO resultado da expressao em RPN e: %f\n\n", pilha_pop(pilhaCalculo).valor);
+    printf("\n\nO resultado da expressao em RPN e: %.4f\n\n", pilha_pop(pilhaCalculo).valor);
     pilha_destruir(pilhaOperadores);
     fila_destruir(filaSaida);
 //---------------------------- FIM DO CALCULO ------------------------------------
