@@ -58,10 +58,10 @@ Token fila_remover(Fila *f) {
 
 int fila_vazia(Fila *f) {
 	if(f->primeiro == NULL){
-        return 0;
+        return 1;
     }
     else{
-        return 1;
+        return 0;
     }
 }
 
