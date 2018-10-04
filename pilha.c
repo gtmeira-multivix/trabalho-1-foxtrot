@@ -26,6 +26,11 @@ void pilha_push(Pilha *p, Token t) {
 }
 
 Token pilha_pop(Pilha *p) {
+    if(p->primeiro == NULL){
+        printf("ERRO em 'pilha_pop': Pilha Vazia!");
+        return;
+    }
+
 	Token tmpToken = p->primeiro->token;
     No *tmp = p->primeiro;
 
@@ -37,7 +42,7 @@ Token pilha_pop(Pilha *p) {
 
 Token pilha_primeiro(Pilha *p) {
     if(p->primeiro == NULL){
-        printf("Pilha Vazia!");
+        printf("ERRO em 'pilha_primeiro': Pilha Vazia!");
         return;
     }
     Token tmpToken = p->primeiro->token;
@@ -65,7 +70,7 @@ void pilha_destruir(Pilha *p) {
 
 void pilha_imprimir(Pilha *p) {
 	if(p->primeiro == NULL){
-        printf("Pilha Vazia!");
+        printf("ERRO em 'pilha_imprimir': Pilha Vazia!");
         return;
     }
     No *tmp = p->primeiro;
