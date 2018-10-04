@@ -8,6 +8,7 @@ int main() {
     Fila *filaTokens = fila_criar();
     Fila *filaSaida = fila_criar();
     Pilha *pilhaOperadores = pilha_criar();
+    Pilha *pilhaCalculo = pilha_criar();
 
 	printf("Digite uma expressao:\n");
 	Token t = token_proximo();
@@ -23,10 +24,11 @@ int main() {
 //--------------------------------------------------------------------------------
 //------------------------ TRANSFORMAÇÃO PARA RPN --------------------------------
 //--------------------------------------------------------------------------------
+    Token tmpToken;
     Token topo;
     topo.precedencia = 0;
     while(!fila_vazia(filaTokens)){ //Equanto a fila não estiver vazia
-        Token tmpToken = fila_remover(filaTokens);
+        tmpToken = fila_remover(filaTokens);
 
         switch(tmpToken.tipo){
             case NUMERO:
@@ -74,11 +76,64 @@ int main() {
     while(!pilha_vazia(pilhaOperadores)){//Enquanto houver operadores na pilha
         fila_adicionar(filaSaida, pilha_pop(pilhaOperadores));
     }
+
+    fila_destruir(filaTokens);
+    pilha_destruir(pilhaOperadores);
 //------------------------- FIM DA TRANSFORMAÇÃO ---------------------------------
 //--------------------------------------------------------------------------------
 
     printf("\n\nA expressao em RPN e: ");
     fila_imprimir(filaSaida);
+
+//--------------------------------------------------------------------------------
+//---------------------- CALCULO DA EXPRESSÃO EM RPN -----------------------------
+//--------------------------------------------------------------------------------
+    while(!fila_vazia(filaSaida)){
+        tmpToken = fila_remover(filaSaida);
+        if(tmpToken.tipo == NUMERO){
+            pilha_push(pilhaCalculo, tmpToken);
+        }
+        else{
+            int res, num1, num2;
+            num2 = pilha_pop(pilhaCalculo).valor;
+            num1 = pilha_pop(pilhaCalculo).valor;
+
+            switch(tmpToken.operador){
+                case SOMA:
+                    res = num1 + num2;
+                    pilha_push(pilhaCalculo, token_criar_numero(res));
+                    break;
+
+                case SUB:
+                    res = num1 - num2;
+                    pilha_push(pilhaCalculo, token_criar_numero(res));
+                    break;
+
+                case DIV:
+                    res = num1 / num2;
+                    pilha_push(pilhaCalculo, token_criar_numero(res));
+                    break;
+
+                case MULT:
+                    res = num1 * num2;
+                    pilha_push(pilhaCalculo, token_criar_numero(res));
+                    break;
+
+                case POT:
+                    res = pow(num1, num2);
+                    pilha_push(pilhaCalculo, token_criar_numero(res));
+                    break;
+                default:
+                    printf("\nErro ao calcular expressao!\nEncerrando programa");
+                    return 0;
+            }
+        }
+    }
+    printf("\n\nO resultado da expressao em RPN e: %f\n\n", pilha_pop(pilhaCalculo).valor);
+    pilha_destruir(pilhaOperadores);
+    fila_destruir(filaSaida);
+//---------------------------- FIM DO CALCULO ------------------------------------
+//--------------------------------------------------------------------------------
 
 	return 0;
 }
