@@ -38,6 +38,6 @@ O trabalho deve ser entregue até as **23:59 do dia 06/10 (sábado)**. A entrega
 ## Grupo
 O trabalho pode ser feito em grupos de até 3 pessoas. Preencha abaixo o nome dos integrantes do grupo:
 
-1) Luiz Henrique Saydt - 1-1713369
+1) Luiz Henrique Saydt - 1-1714369
 2) João Marcus Germano - 1-1711798
 3) Victor Ricardo Kruger Martins - 1-1711756
