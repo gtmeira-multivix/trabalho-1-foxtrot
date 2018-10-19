@@ -28,7 +28,8 @@ void pilha_push(Pilha *p, Token t) {
 Token pilha_pop(Pilha *p) {
     if(p->primeiro == NULL){
         printf("ERRO em 'pilha_pop': Pilha Vazia!");
-        return;
+        Token t;
+        return t;
     }
 
 	Token tmpToken = p->primeiro->token;
@@ -43,7 +44,8 @@ Token pilha_pop(Pilha *p) {
 Token pilha_primeiro(Pilha *p) {
     if(p->primeiro == NULL){
         printf("ERRO em 'pilha_primeiro': Pilha Vazia!");
-        return;
+        Token t;
+        return t;
     }
     Token tmpToken = p->primeiro->token;
 	return(tmpToken);

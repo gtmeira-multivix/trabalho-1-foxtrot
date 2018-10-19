@@ -37,7 +37,8 @@ void fila_adicionar(Fila *f, Token t) {
 Token fila_remover(Fila *f) {
     if(f->primeiro == NULL){
         printf("A fila esta vazia!");
-        return;
+        Token t;
+        return t;
     }
 
     No *tmp;
