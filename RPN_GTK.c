@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
-
+#include "tokenizacao.h"
 //compilar com gcc -o main main.c `pkg-config --cflags --libs gtk+-2.0`
 
 void destruir (GtkWidget *widget, gpointer *data){
@@ -66,6 +66,14 @@ int main(int argc, char *argv[]){
 
 void rpn (GtkWidget *widget, gpointer *data){
     const gchar *texto = gtk_entry_get_text((GtkEntry *) entrada_algebrica);
+
+    Token t;
+    gchar *pos = (gchar*) texto;
+    pos = token_proximo(pos, &t);
+    while(t.tipo != FIM && t.tipo != ERRO) {
+        token_imprimir(t);
+        pos = token_proximo(pos, &t);
+    }
     gtk_label_set_text((GtkLabel *)label, texto);
     g_print("%s", texto);
 }

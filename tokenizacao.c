@@ -2,33 +2,35 @@
 #include <ctype.h>
 #include "tokenizacao.h"
 
-Token token_proximo() {
+gchar* token_proximo(gchar *str, Token *tok) {
   Token t;
   
-  //Obter próimo caractere da entrada:
-  int c = getchar();
+  //Obter prï¿½imo caractere da entrada:
+  int c = *(str++);
   
-  //Avançar enquanto houver espaços vazios na entrada:
-  while(isspace(c) && c != '\n') {
-    c = getchar();
+  //Avanï¿½ar enquanto houver espaï¿½os vazios na entrada:
+  while(isspace(c) && c != '\0') {
+    c = *(str++);
   }
   
-  //Se chegamos ao fim da linha, nossa expressão terminou:
-  if(c == '\n') {
+  //Se chegamos ao fim da linha, nossa expressï¿½o terminou:
+  if(c == '\0') {
     t.tipo = FIM;
-    return t;
+    *tok = t;
+    return str;
   }
   
   if(isdigit(c)) {
-    //Se for número, vamos colocar o caractere de volta na stream, para ler com scanf:
-    ungetc(c, stdin);
+    //Se for nï¿½mero, vamos colocar o caractere de volta na stream, para ler com scanf:
+    str--;
     double valor;
-    scanf("%lf", &valor);
+    str += sscanf(str, "%lf", &valor);
     t.tipo = NUMERO;
     t.valor = valor;
-    return t;
+    *tok = t;
+    return str;
   } else {
-    //Se não for número, é operador ou parênteses:
+    //Se nï¿½o for nï¿½mero, ï¿½ operador ou parï¿½nteses:
     switch(c) {
       case '+':
         t.tipo = OPERADOR;
@@ -78,7 +80,8 @@ Token token_proximo() {
         break;
     }
     
-    return t;
+    *tok = t;
+    return str;
   }
 }
 

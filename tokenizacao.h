@@ -1,12 +1,13 @@
 #ifndef _TOKENIZACAO_H
 #define _TOKENIZACAO_H
+#include <gtk/gtk.h>
 
 typedef enum tipo_token {
-  NUMERO, OPERADOR, ABRE_PARENTESES, FECHA_PARENTESES
+  NUMERO, OPERADOR, ABRE_PARENTESES, FECHA_PARENTESES, FIM, ERRO
 } TipoToken;
 
 typedef enum tipo_operador {
-  SOMA, SUB, MULT, DIV, POT, FIM, ERRO
+  SOMA, SUB, MULT, DIV, POT
 } TipoOperador;
 
 typedef enum associatividade {
@@ -22,18 +23,18 @@ typedef struct token {
 } Token;
 
 /*
- * Cria um token do tipo número, armazenando o valor passado
- * como parâmetro.
+ * Cria um token do tipo nï¿½mero, armazenando o valor passado
+ * como parï¿½metro.
  */
 Token token_criar_numero(double valor);
 
 /*
- * Lê o próximo token a partir da entrada padrão.
+ * Lï¿½ o prï¿½ximo token a partir da entrada padrï¿½o.
  */
-Token token_proximo();
+gchar* token_proximo(gchar *str, Token *tok);
 
 /*
- * Imprime o token na saída padrão.
+ * Imprime o token na saï¿½da padrï¿½o.
  */
 void token_imprimir(Token t);
 
