@@ -1,3 +1,5 @@
 *.o
 *.exe
 Makefile.win
+trabalho
+.vscode/
