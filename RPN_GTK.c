@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <gtk/gtk.h>
+#include "fila.h"
+#include "pilha.h"
 #include "tokenizacao.h"
+#include "main.c"
 //compilar com gcc -o main main.c `pkg-config --cflags --libs gtk+-2.0`
 
 void destruir (GtkWidget *widget, gpointer *data){
@@ -67,13 +70,18 @@ int main(int argc, char *argv[]){
 void rpn (GtkWidget *widget, gpointer *data){
     const gchar *texto = gtk_entry_get_text((GtkEntry *) entrada_algebrica);
 
+    Fila *filaTokens = fila_criar();
     Token t;
     gchar *pos = (gchar*) texto;
     pos = token_proximo(pos, &t);
     while(t.tipo != FIM && t.tipo != ERRO) {
         token_imprimir(t);
+        fila_adicionar(filaTokens, t);
         pos = token_proximo(pos, &t);
     }
+
+    transforma_RPN(filaTokens);
+
     gtk_label_set_text((GtkLabel *)label, texto);
     g_print("%s", texto);
 }

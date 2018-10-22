@@ -3,27 +3,14 @@
 #include "pilha.h"
 #include "fila.h"
 #include "tokenizacao.h"
+#include "main.h"
 
-int main() {
-    Fila *filaTokens = fila_criar();
+Fila * transforma_RPN(Fila *filaTokens) {
+
     Fila *filaSaida = fila_criar();
     Pilha *pilhaOperadores = pilha_criar();
-    Pilha *pilhaCalculo = pilha_criar();
 
-	printf("Digite uma expressao:\n");
-	Token t = token_proximo();
-	
-	while(t.tipo != FIM && t.tipo != ERRO) { //O professor usou t.tipo, mas tipo não possui os valores FIM e ERRO
-		printf("\nToken = ");
-		token_imprimir(t);
-        fila_adicionar(filaTokens, t);
-		t = token_proximo();
-	}
-	
 
-//--------------------------------------------------------------------------------
-//------------------------ TRANSFORMAÇÃO PARA RPN --------------------------------
-//--------------------------------------------------------------------------------
     Token tmpToken;
     Token topo;
     topo.precedencia = 0;
@@ -79,15 +66,18 @@ int main() {
 
     fila_destruir(filaTokens);
     pilha_destruir(pilhaOperadores);
-//------------------------- FIM DA TRANSFORMAÇÃO ---------------------------------
-//--------------------------------------------------------------------------------
+
 
     printf("\n\nA expressao em RPN e: ");
     fila_imprimir(filaSaida);
+    return filaSaida;
+}
 
-//--------------------------------------------------------------------------------
-//---------------------- CALCULO DA EXPRESSÃO EM RPN -----------------------------
-//--------------------------------------------------------------------------------
+float calcula_RPN(Fila *filaSaida){
+
+    Pilha *pilhaCalculo = pilha_criar();
+    Token tmpToken;
+
     while(!fila_vazia(filaSaida)){
         tmpToken = fila_remover(filaSaida);
         if(tmpToken.tipo == NUMERO){
@@ -129,11 +119,10 @@ int main() {
             }
         }
     }
-    printf("\n\nO resultado da expressao em RPN e: %.4f\n\n", pilha_pop(pilhaCalculo).valor);
-    pilha_destruir(pilhaOperadores);
+    float res_rpn = pilha_pop(pilhaCalculo).valor;
+    printf("\n\nO resultado da expressao em RPN e: %.4f\n\n", res_rpn);
     fila_destruir(filaSaida);
-//---------------------------- FIM DO CALCULO ------------------------------------
-//--------------------------------------------------------------------------------
+    pilha_destruir(pilhaCalculo);
 
-	return 0;
+	return res_rpn;
 }
