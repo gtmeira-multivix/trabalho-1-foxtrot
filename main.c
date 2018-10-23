@@ -1,7 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-#include "pilha.h"
-#include "fila.h"
 #include "tokenizacao.h"
 #include "main.h"
 
@@ -68,8 +66,9 @@ Fila * transforma_RPN(Fila *filaTokens) {
     pilha_destruir(pilhaOperadores);
 
 
-    printf("\n\nA expressao em RPN e: ");
+    g_print("\n\nA expressao em RPN e: ");
     fila_imprimir(filaSaida);
+    g_print("\n");
     return filaSaida;
 }
 

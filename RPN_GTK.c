@@ -4,7 +4,7 @@
 #include "fila.h"
 #include "pilha.h"
 #include "tokenizacao.h"
-#include "main.c"
+#include "main.h"
 //compilar com gcc -o main main.c `pkg-config --cflags --libs gtk+-2.0`
 
 void destruir (GtkWidget *widget, gpointer *data){
@@ -49,7 +49,7 @@ int main(int argc, char *argv[]){
     gtk_box_pack_start(GTK_BOX(subcaixa1), botao, TRUE, TRUE, 0);
     gtk_widget_show(botao);
 
-    label = gtk_label_new("Equação em RPN: ");
+    label = gtk_label_new("Expressão em RPN: ");
     gtk_box_pack_start(GTK_BOX(subcaixa2), label, TRUE, TRUE, 0);
     gtk_widget_show(label);
 
@@ -83,5 +83,4 @@ void rpn (GtkWidget *widget, gpointer *data){
     transforma_RPN(filaTokens);
 
     gtk_label_set_text((GtkLabel *)label, texto);
-    g_print("%s", texto);
 }

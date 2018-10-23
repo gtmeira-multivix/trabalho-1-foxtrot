@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <ctype.h>
+#include <string.h>
 #include "tokenizacao.h"
 
 gchar* token_proximo(gchar *str, Token *tok) {
@@ -24,7 +25,11 @@ gchar* token_proximo(gchar *str, Token *tok) {
     //Se for n�mero, vamos colocar o caractere de volta na stream, para ler com scanf:
     str--;
     double valor;
-    str += sscanf(str, "%lf", &valor);
+    sscanf(str, "%lf", &valor);
+    char tmp[15];
+    int i = sprintf(tmp, "%f", valor);
+    //printf("\n\nValor de i: %d\n\n", i);
+    str += (i-7);
     t.tipo = NUMERO;
     t.valor = valor;
     *tok = t;

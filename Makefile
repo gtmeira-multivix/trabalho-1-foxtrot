@@ -1,5 +1,8 @@
-all: fila.o pilha.o tokenizacao.o RPN_GTK.c
-	gcc-8 -o trabalho fila.o pilha.o tokenizacao.o RPN_GTK.c -lm `pkg-config --cflags --libs gtk+-2.0`
+all: main.o fila.o pilha.o tokenizacao.o RPN_GTK.c
+	gcc-8 -o trabalho main.o fila.o pilha.o tokenizacao.o RPN_GTK.c -lm `pkg-config --cflags --libs gtk+-2.0`
+
+main.o: main.c
+	gcc-8 -c main.c `pkg-config --cflags gtk+-2.0`
 
 fila.o: fila.c
 	gcc-8 -c fila.c
