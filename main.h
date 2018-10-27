@@ -5,6 +5,6 @@
 
 Fila * transforma_RPN(Fila *filaTokens);
 
-float calcula_RPN(Fila *filaSaida);
+double calcula_RPN(Fila *filaSaida);
 
 #endif

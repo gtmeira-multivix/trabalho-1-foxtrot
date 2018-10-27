@@ -70,13 +70,39 @@ void fila_destruir(Fila *f) {
 	free(f);
 }
 
-void fila_imprimir(Fila *f) {
+char* fila_imprimir(Fila *f) {
 	No *tmp;
     tmp = f->primeiro;
+    char *expressao = (char *)malloc(fila_tamanho(f) + 1);
+    strcpy(expressao, "");
+    printf("\nExpressao anterior: %s \n", expressao);
+    printf("\nTamanho da fila: %d\n", fila_tamanho(f));
 
     while(tmp != NULL){
-        token_imprimir(tmp->token);
+        token_imprimir(tmp->token, expressao);
+        tmp = tmp->prox;
+    }
+    printf("\nExpressao: %s \n", expressao);
+    return expressao;
+}
+
+int fila_tamanho(Fila *f) {
+    No *tmp;
+    tmp = f->primeiro;
+    int tam = 0;
+
+    while(tmp != NULL){
+        if(tmp->token.tipo == NUMERO){
+            char str[15];
+            int tam_tmp = sprintf(str, "%.2lf", tmp->token.valor);
+            printf("\n\ntamanho: %d\n\n", tam_tmp);
+            tam += (tam_tmp + 1);
+        }
+        else if(tmp->token.tipo == OPERADOR){
+            tam += 2;
+        }
         tmp = tmp->prox;
     }
 
+    return tam;
 }

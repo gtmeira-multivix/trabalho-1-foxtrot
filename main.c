@@ -64,15 +64,11 @@ Fila * transforma_RPN(Fila *filaTokens) {
 
     fila_destruir(filaTokens);
     pilha_destruir(pilhaOperadores);
-
-
-    g_print("\n\nA expressao em RPN e: ");
-    fila_imprimir(filaSaida);
-    g_print("\n");
+    
     return filaSaida;
 }
 
-float calcula_RPN(Fila *filaSaida){
+double calcula_RPN(Fila *filaSaida){
 
     Pilha *pilhaCalculo = pilha_criar();
     Token tmpToken;
@@ -83,7 +79,7 @@ float calcula_RPN(Fila *filaSaida){
             pilha_push(pilhaCalculo, tmpToken);
         }
         else{
-            float res, num1, num2;
+            double res, num1, num2;
             num2 = pilha_pop(pilhaCalculo).valor;
             num1 = pilha_pop(pilhaCalculo).valor;
 
@@ -118,9 +114,7 @@ float calcula_RPN(Fila *filaSaida){
             }
         }
     }
-    float res_rpn = pilha_pop(pilhaCalculo).valor;
-    printf("\n\nO resultado da expressao em RPN e: %.4f\n\n", res_rpn);
-    fila_destruir(filaSaida);
+    double res_rpn = pilha_pop(pilhaCalculo).valor;
     pilha_destruir(pilhaCalculo);
 
 	return res_rpn;

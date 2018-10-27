@@ -25,11 +25,9 @@ gchar* token_proximo(gchar *str, Token *tok) {
     //Se for n�mero, vamos colocar o caractere de volta na stream, para ler com scanf:
     str--;
     double valor;
-    sscanf(str, "%lf", &valor);
-    char tmp[15];
-    int i = sprintf(tmp, "%f", valor);
-    //printf("\n\nValor de i: %d\n\n", i);
-    str += (i-7);
+    int i;
+    sscanf(str, "%lf%n", &valor, &i);
+    str += i;
     t.tipo = NUMERO;
     t.valor = valor;
     *tok = t;
@@ -90,50 +88,43 @@ gchar* token_proximo(gchar *str, Token *tok) {
   }
 }
 
-void token_imprimir(Token t) {
+void token_imprimir(Token t, char *str) {
   switch(t.tipo) {
     case OPERADOR:
       switch(t.operador) {
         case SOMA:
-          printf("+ ");
+          strcat(str,"+ ");
           break;
         
         case SUB:
-          printf("- ");
+          strcat(str,"- ");
           break;
         
         case MULT:
-          printf("* ");
+          strcat(str,"* ");
           break;
         
         case DIV:
-          printf("/ ");
+          strcat(str,"/ ");
           break;
         
         case POT:
-          printf("^ ");
+          strcat(str,"^ ");
           break;
       }
       break;
     
-    case ABRE_PARENTESES:
-      printf("( ");
-      break;
-    
-    case FECHA_PARENTESES:
-      printf(") ");
-      break;
-    
     case NUMERO:
-      printf("%.2lf ", t.valor);
+      ;
+      char tmp[15];
+      sprintf(tmp, "%.2lf ", t.valor);
+      strcat(str,tmp);
       break;
     
     case FIM:
-      printf("[Fim]\n");
       break;
     
     case ERRO:
-      printf("[Erro!]\n");
       break;
   }
 }

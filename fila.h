@@ -2,6 +2,7 @@
 #define _FILA_H
 
 #include "tokenizacao.h"
+#include "string.h"
 
 typedef struct fila Fila;
 
@@ -16,23 +17,28 @@ Fila* fila_criar();
 void fila_adicionar(Fila *f, Token t);
 
 /*
- * Remove um elemento do início da fila.
+ * Remove um elemento do inï¿½cio da fila.
  */
 Token fila_remover(Fila *f);
 
 /*
- * Retorna 1 se a fila estiver vazia e 0 caso contrário.
+ * Retorna 1 se a fila estiver vazia e 0 caso contrï¿½rio.
  */
 int fila_vazia(Fila *f);
 
 /*
- * Destrói a fila e seus elementos.
+ * Destrï¿½i a fila e seus elementos.
  */
 void fila_destruir(Fila *f);
 
 /*
  * Imprime os elementos da fila.
  */
-void fila_imprimir(Fila *f);
+char* fila_imprimir(Fila *f);
+
+/*
+ * Retorna o tamanho em bytes da fila de saida.
+ */
+int fila_tamanho(Fila *f);
 
 #endif

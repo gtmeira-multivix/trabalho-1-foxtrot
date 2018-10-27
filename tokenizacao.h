@@ -36,6 +36,6 @@ gchar* token_proximo(gchar *str, Token *tok);
 /*
  * Imprime o token na sa�da padr�o.
  */
-void token_imprimir(Token t);
+void token_imprimir(Token t, char *str);
 
 #endif

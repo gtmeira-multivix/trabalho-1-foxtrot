@@ -70,7 +70,7 @@ void pilha_destruir(Pilha *p) {
     free(p);
 }
 
-void pilha_imprimir(Pilha *p) {
+/*void pilha_imprimir(Pilha *p) {
 	if(p->primeiro == NULL){
         printf("ERRO em 'pilha_imprimir': Pilha Vazia!");
         return;
@@ -78,8 +78,8 @@ void pilha_imprimir(Pilha *p) {
     No *tmp = p->primeiro;
     while(tmp != NULL){
         Token tmpToken = tmp->token;
-        token_imprimir(tmpToken);
+        //token_imprimir(tmpToken);
         tmp = tmp->prox;
     }
-}
+}*/
 

@@ -5,10 +5,10 @@ main.o: main.c
 	gcc-8 -c main.c `pkg-config --cflags gtk+-2.0`
 
 fila.o: fila.c
-	gcc-8 -c fila.c
+	gcc-8 -c fila.c `pkg-config --cflags gtk+-2.0`
 
 pilha.o: pilha.c
-	gcc-8 -c pilha.c
+	gcc-8 -c pilha.c `pkg-config --cflags gtk+-2.0`
 
 tokenizacao.o: tokenizacao.c
 	gcc-8 -c tokenizacao.c `pkg-config --cflags gtk+-2.0`
