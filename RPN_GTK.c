@@ -102,6 +102,11 @@ void rpn (GtkWidget *widget, gpointer *data){
     gchar res[15];
     sprintf(res, "%g", resultado);
 
-    gtk_label_set_text((GtkLabel *)label, expressao);
-    gtk_label_set_text((GtkLabel *)label_res, res);
+    gtk_label_set_text (GTK_LABEL (label), expressao);
+
+    char *markup;
+    const char *resul = res;
+    const char *format = "<span size=\"x-large\"><b>%s</b></span>";
+    markup = g_markup_printf_escaped (format, resul);
+    gtk_label_set_markup (GTK_LABEL (label_res), markup);
 }
